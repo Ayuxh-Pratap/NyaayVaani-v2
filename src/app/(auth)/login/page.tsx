@@ -8,7 +8,6 @@ import Link from "next/link";
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,19 +18,19 @@ export default function LoginPage() {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-orange-100 relative overflow-hidden">
             {/* Back to Home Button */}
             <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-4 left-4 z-20"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-2 px-4 py-2"
-        >
-          <MoveLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          <span className="font-medium">Back to Home</span>
-        </Link>
-      </motion.div>
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute top-4 left-4 z-20"
+            >
+                <Link
+                    href="/"
+                    className="flex items-center gap-2 px-4 py-2"
+                >
+                    <MoveLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span className="font-medium">Back to Home</span>
+                </Link>
+            </motion.div>
 
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.5] z-0"
@@ -116,19 +115,6 @@ export default function LoginPage() {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder="Password"
-                                        className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
-                                        required
-                                    />
-                                </div>
-
-                                {/* Confirm Password Field */}
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                                    <input
-                                        type="password"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        placeholder="Confirm Password"
                                         className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all"
                                         required
                                     />

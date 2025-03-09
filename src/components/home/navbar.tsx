@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -13,9 +14,9 @@ export default function Navbar() {
                         <span className="text-black">Nyaay</span>
                         <span className="text-orange-500">Vaani</span>
                     </h1>
-                    
+
                     {/* Hamburger Menu Button */}
-                    <button 
+                    <button
                         className="md:hidden"
                         onClick={() => setIsOpen(!isOpen)}
                     >
@@ -32,10 +33,9 @@ export default function Navbar() {
                 </div>
 
                 {/* Navigation Links */}
-                <div 
-                    className={`${
-                        isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-                    } md:max-h-full md:opacity-100 overflow-hidden transition-all duration-500 ease-in-out flex flex-col md:flex-row items-end md:items-center gap-6 w-full md:w-auto mt-4 md:mt-0`}
+                <div
+                    className={`${isOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+                        } md:max-h-full md:opacity-100 overflow-hidden transition-all duration-500 ease-in-out flex flex-col md:flex-row items-end md:items-center gap-6 w-full md:w-auto mt-4 md:mt-0`}
                 >
                     <div className="flex flex-col md:flex-row items-center md:items-center gap-6 md:pl-0 bg-orange-100 md:p-0 md:bg-transparent p-8 rounded-2xl">
                         <h1 className="cursor-pointer relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-orange-500 after:left-0 after:bottom-0 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100">Home</h1>
@@ -43,7 +43,9 @@ export default function Navbar() {
                         <h1 className="cursor-pointer relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-orange-500 after:left-0 after:bottom-0 after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100">Contact</h1>
 
                         <button className="bg-orange-500 text-white px-4 py-2 rounded-md">
-                            Login
+                            <Link href="/login">
+                                Login
+                            </Link>
                         </button>
                     </div>
                 </div>

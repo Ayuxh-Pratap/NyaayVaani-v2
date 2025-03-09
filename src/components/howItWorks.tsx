@@ -3,10 +3,112 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { StarIcon, ClockIcon, CheckCircleIcon, GlobeIcon } from 'lucide-react';
+
+// Add this interface near the top of the file, after the imports
+interface Step {
+    id: number;
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    demo: "voice-input" | "processing" | "document";
+}
+
+const Step = ({ step, index }: { step: Step; index: number }) => {
+    const [ref, inView] = useInView({
+        threshold: 0.2,
+        triggerOnce: true
+    });
+
+    return (
+        <motion.div
+            key={step.id}
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            className="relative"
+        >
+            {/* Step Card */}
+            <div className="bg-white rounded-2xl shadow-lg p-6 relative z-10">
+                <div className="bg-deep-blue/5 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                    {step.icon}
+                </div>
+                <h3 className="text-xl font-bold text-deep-blue mb-2">
+                    {step.title}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                    {step.description}
+                </p>
+
+                {/* Interactive Demo Area */}
+                <div className="bg-gray-50 rounded-lg p-4 h-32 flex items-center justify-center">
+                    {step.demo === "voice-input" && (
+                        <div className="flex items-center space-x-2">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    className="w-1.5 bg-orange-400 rounded-full"
+                                    initial={{ height: "15px" }}
+                                    animate={{
+                                        height: ["15px", "45px", "15px"],
+                                    }}
+                                    transition={{
+                                        duration: 1.5,
+                                        repeat: Infinity,
+                                        delay: i * 0.1,
+                                        ease: "easeInOut"
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {step.demo === "processing" && (
+                        <motion.div
+                            animate={{
+                                scale: [1, 1.2, 1],
+                                rotate: [0, 180, 360],
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="w-12 h-12 border-4 border-orange-400 border-t-transparent rounded-full"
+                        />
+                    )}
+
+                    {step.demo === "document" && (
+                        <motion.div
+                            className="w-full max-w-[200px] space-y-2"
+                            initial={{ opacity: 0.5 }}
+                            animate={{
+                                opacity: [0.5, 1, 0.5]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                        >
+                            <div className="h-1 bg-orange-400 rounded w-full" />
+                            <div className="h-1 bg-orange-400 rounded w-2/3" />
+                            <div className="h-1 bg-orange-400 rounded w-3/4" />
+                        </motion.div>
+                    )}
+                </div>
+            </div>
+
+            {/* Step Number */}
+            <div className="absolute -top-4 -right-4 w-8 h-8 bg-orange-400 text-white rounded-full flex items-center justify-center font-bold">
+                {step.id}
+            </div>
+        </motion.div>
+    );
+};
 
 const HowItWorks = () => {
-    const steps = [
+    const steps: Step[] = [
         {
             id: 1,
             title: "Speak Naturally",
@@ -92,99 +194,9 @@ const HowItWorks = () => {
 
                     {/* Steps */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-                        {steps.map((step, index) => {
-                            const [ref, inView] = useInView({
-                                threshold: 0.2,
-                                triggerOnce: true
-                            });
-
-                            return (
-                                <motion.div
-                                    key={step.id}
-                                    ref={ref}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                                    transition={{ duration: 0.8, delay: index * 0.2 }}
-                                    className="relative"
-                                >
-                                    {/* Step Card */}
-                                    <div className="bg-white rounded-2xl shadow-lg p-6 relative z-10">
-                                        <div className="bg-deep-blue/5 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-                                            {step.icon}
-                                        </div>
-                                        <h3 className="text-xl font-bold text-deep-blue mb-2">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-gray-600 mb-4">
-                                            {step.description}
-                                        </p>
-
-                                        {/* Interactive Demo Area */}
-                                        <div className="bg-gray-50 rounded-lg p-4 h-32 flex items-center justify-center">
-                                            {step.demo === "voice-input" && (
-                                                <div className="flex items-center space-x-2">
-                                                    {[1, 2, 3, 4, 5].map((i) => (
-                                                        <motion.div
-                                                            key={i}
-                                                            className="w-1.5 bg-orange-400 rounded-full"
-                                                            initial={{ height: "15px" }}
-                                                            animate={{
-                                                                height: ["15px", "45px", "15px"],
-                                                            }}
-                                                            transition={{
-                                                                duration: 1.5,
-                                                                repeat: Infinity,
-                                                                delay: i * 0.1,
-                                                                ease: "easeInOut"
-                                                            }}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            )}
-
-                                            {step.demo === "processing" && (
-                                                <motion.div
-                                                    animate={{
-                                                        scale: [1, 1.2, 1],
-                                                        rotate: [0, 180, 360],
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut"
-                                                    }}
-                                                    className="w-12 h-12 border-4 border-orange-400 border-t-transparent rounded-full"
-                                                />
-                                            )}
-
-                                            {step.demo === "document" && (
-                                                <motion.div
-                                                    className="w-full max-w-[200px] space-y-2"
-                                                    initial={{ opacity: 0.5 }}
-                                                    animate={{
-                                                        opacity: [0.5, 1, 0.5]
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut"
-                                                    }}
-                                                >
-                                                    <div className="h-1 bg-orange-400 rounded w-full" />
-                                                    <div className="h-1 bg-orange-400 rounded w-2/3" />
-                                                    <div className="h-1 bg-orange-400 rounded w-3/4" />
-                                                </motion.div>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {/* Step Number */}
-                                    <div className="absolute -top-4 -right-4 w-8 h-8 bg-orange-400 text-white rounded-full flex items-center justify-center font-bold">
-                                        {step.id}
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
+                        {steps.map((step, index) => (
+                            <Step key={step.id} step={step} index={index} />
+                        ))}
                     </div>
                 </div>
 

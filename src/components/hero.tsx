@@ -1,6 +1,4 @@
 "use client"
-
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
@@ -12,11 +10,6 @@ export default function Hero() {
         { en: 'Evidence', hi: 'सबूत' }
     ];
 
-    const fadeIn = {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 }
-    };
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-orange-100">
                 <div className='max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 md:pt-40 mt-14 overflow-hidden pb-32'>

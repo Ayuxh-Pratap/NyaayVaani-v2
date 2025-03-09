@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, Globe2, Languages, Home, ArrowBigLeft, MoveLeft } from "lucide-react";
+import { Mail, Lock, User, Globe2, Languages, MoveLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function SignupPage() {

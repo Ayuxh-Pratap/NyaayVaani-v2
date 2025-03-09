@@ -185,7 +185,7 @@ export default function LoginPage() {
                                     Forgot password?
                                 </a>
                                 <p className="mt-2">
-                                    Don't have an account?{" "}
+                                    Don&apos;t have an account?{" "}
                                     <Link href="/signup" className="text-orange-500 hover:text-orange-600 font-medium">
                                         Sign up
                                     </Link>
